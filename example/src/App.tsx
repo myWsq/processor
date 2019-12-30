@@ -1,36 +1,50 @@
-import React, { useEffect, useMemo } from "react";
-import useList from "./react";
+import React, { useEffect, useMemo, useReducer } from "react";
 import Pagination from "bulma-pagination-react";
 
 import { getSourceData } from "./utils";
+import QueryIt from "../../src/query-it";
+
+function useQueryIt<T>(wait: number = 0) {
+  const query = useMemo(
+    () =>
+      new QueryIt<T>(() => {
+        forceUpdate();
+      }, wait),
+    []
+  );
+
+  const [_, forceUpdate] = useReducer(x => x + 1, 0);
+
+  return query;
+}
 
 const App = () => {
   const sourceData = useMemo(() => getSourceData(500), []);
 
-  const list = useList<typeof sourceData[0]>();
+  const query = useQueryIt<typeof sourceData[0]>();
   useEffect(() => {
-    list.load(sourceData);
+    query.load(sourceData);
     // @ts-ignore
     onSortAge("asc");
-    list.setPageSize(10);
+    query.setPageSize(10);
   }, []);
 
   function onSortAge(order: "asc" | "desc") {
-    list.sort("age", order);
+    query.sort("age", order);
   }
 
   function onFilterSex(val: string) {
-    list.filter({
+    query.filter({
       sex: val
     });
   }
 
   function onSearchNameAndEmail(val: string) {
-    list.search(val, ["name", "email"]);
+    query.search(val, ["name", "email"]);
   }
 
   function onPaginate(currentPage: number) {
-    list.setCurrentPage(currentPage);
+    query.setCurrentPage(currentPage);
   }
 
   return (
@@ -45,7 +59,7 @@ const App = () => {
               onSearchNameAndEmail(e.currentTarget.value);
             }}
           ></input>
-          <label className="label">Total: {list.total}</label>
+          <label className="label">Total: {query.total}</label>
           <div className="spacer"></div>
           <div className="select">
             <select
@@ -80,7 +94,7 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            {list.items.map(item => (
+            {query.items.map(item => (
               <tr>
                 <td>{item.name}</td>
                 <td>{item.age}</td>
@@ -91,8 +105,8 @@ const App = () => {
           </tbody>
         </table>
         <Pagination
-          pages={list.pageCount}
-          currentPage={list.currentPage}
+          pages={query.pageCount}
+          currentPage={query.currentPage}
           onChange={page => onPaginate(page)}
         ></Pagination>
       </div>

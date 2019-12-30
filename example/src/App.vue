@@ -30,7 +30,7 @@
       </div>
       <a
         class="panel-block"
-        v-for="item in list.items"
+        v-for="item in query.items"
         :key="item.name + item.email"
       >
         <div class="level-item name">
@@ -85,42 +85,69 @@ import {
   ref
 } from "@vue/composition-api";
 import { getSourceData } from "./utils";
-import useList from "./vue";
+
+import QueryIt from "../../src/query-it";
+
+function useQueryIt<T>(wait: number = 0) {
+  const query = new QueryIt<T>(() => {
+    items.value = query.items;
+    currentPage.value = query.currentPage;
+    pageSize.value = query.pageSize;
+    pageCount.value = query.pageCount;
+    total.value = query.total;
+  }, wait);
+  const items = ref(query.items);
+  const currentPage = ref(query.currentPage);
+  const pageSize = ref(query.pageSize);
+  const pageCount = ref(query.pageCount);
+  const total = ref(query.total);
+
+  return reactive({
+    load: query.load.bind(query),
+    sort: query.sort.bind(query),
+    filter: query.filter.bind(query),
+    search: query.search.bind(query),
+    setPageSize: query.setPageSize.bind(query),
+    setCurrentPage: query.setCurrentPage.bind(query),
+    items,
+    currentPage,
+    pageSize,
+    pageCount,
+    total
+  });
+}
 
 export default createComponent({
   setup() {
     const sourceData = getSourceData(15);
-    const list = useList<typeof sourceData[0]>();
+    const query = useQueryIt<typeof sourceData[0]>();
 
     const filter = reactive({
       sex: ""
     });
 
-    const searchText = ref("");
-
     onMounted(() => {
-      list.load(sourceData);
+      query.load(sourceData);
     });
 
     function onSortAge(order: "asc" | "desc") {
-      list.sort("age", order);
+      query.sort("age", order);
     }
 
     function onFilterSex(val: string) {
       filter.sex = val;
-      list.filter({
+      query.filter({
         sex: val
       });
     }
 
     function onSearchNameAndEmail(val: string) {
-      list.search(val, ["name", "email"]);
+      query.search(val, ["name", "email"]);
     }
 
     return {
-      list,
+      query,
       filter,
-      searchText,
       onSortAge,
       onFilterSex,
       onSearchNameAndEmail

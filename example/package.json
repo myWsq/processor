@@ -1,8 +1,5 @@
 {
   "name": "example",
-  "version": "1.1.0",
-  "description": "",
-  "main": "index.js",
   "dependencies": {
     "@vue/composition-api": "^0.3.4",
     "bulma-pagination-react": "^0.1.1",
@@ -15,15 +12,13 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
     "@vue/component-compiler-utils": "^3.1.0",
     "parcel-bundler": "^1.12.4",
     "sass": "^1.24.0"
   },
   "scripts": {
     "dev": "parcel src/index.html",
-    "build":"parcel build src/index.html --public-url ./"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "build": "parcel build src/index.html --public-url ./"
+  }
 }
