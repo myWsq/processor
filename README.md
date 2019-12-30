@@ -176,7 +176,7 @@ And just use it normally.
 
 By `Vue.observable` or `vue-composition-api`. And I think the `vue-composition-api` seems to be the most pupular way to write vue project in future.
 
-```js
+```ts
 import QueryIt from "query-it";
 import { reactive } from "@vue/composition-api";
 
@@ -188,8 +188,8 @@ export function useQueryIt<T>() {
 
 It should work well but unfortunately doesn't. Because the `reactive` rewrite the original reactivity. So we need to declare some new reactive state.
 
-```js
-import QueryIt from "../../src/query-it";
+```ts
+import QueryIt from "query-it";
 import { reactive } from "@vue/composition-api";
 
 export default function useQueryIt<T>(wait: number = 0) {
