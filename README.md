@@ -186,7 +186,7 @@ export function useQueryIt<T>() {
 }
 ```
 
-It should work well but unfortunately doesn't. It's because the `reactive`rewrite the original reactivity. So we should declare some new reactive state.
+It should work well but unfortunately doesn't. Because the `reactive` rewrite the original reactivity. So we need to declare some new reactive state.
 
 ```js
 import QueryIt from "../../src/query-it";
@@ -222,4 +222,4 @@ export default function useQueryIt<T>(wait: number = 0) {
 }
 ```
 
-This is not an elegant solution but worked.
+It is not an elegant solution but worked. 🤕

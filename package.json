@@ -1,10 +1,7 @@
 {
   "name": "query-it",
   "version": "1.1.2",
-  "source": "src/query-it.ts",
   "main": "dist/query-it.js",
-  "module": "dist/query-it.mjs.js",
-  "unpkg": "dist/query-it.umd.js",
   "typings": "dist/query-it.d.ts",
   "dependencies": {
     "lodash.debounce": "^4.0.8",
@@ -23,5 +20,12 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "keywords": [
+    "list",
+    "query",
+    "data"
+  ],
+  "license": "MIT",
+  "repository":"myWsq/query-it"
 }
