@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/myWsq/query-it/compare/v1.1.1...v1.1.2) (2019-12-30)
+
+
+### Bug Fixes
+
+* lodash 打包后失效的问题 ([d77d331](https://github.com/myWsq/query-it/commit/d77d331))
+* **example:** 添加 assets prefix ([285ab4e](https://github.com/myWsq/query-it/commit/285ab4e))
+* **example:** 添加build命令 ([482b057](https://github.com/myWsq/query-it/commit/482b057))
+
 ## 1.1.0 (2019-12-30)
 
 
