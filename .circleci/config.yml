@@ -39,8 +39,8 @@ jobs:
       - run: yarn && yarn build
 
       - add_ssh_keys:
-        fingerprints:
-          - "18:38:dd:2a:bb:ff:68:52:f7:32:3d:a6:a9:47:1c:62"
+          fingerprints:
+            - "18:38:dd:2a:bb:ff:68:52:f7:32:3d:a6:a9:47:1c:62"
       
       - run:
           name: Install and configure dependencies
