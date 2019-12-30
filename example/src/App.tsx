@@ -2,19 +2,37 @@ import React, { useEffect, useMemo } from "react";
 import useList from "./react";
 import Pagination from "bulma-pagination-react";
 
-import { getSourceData, getSortOptions, getFilterOptions } from "./utils";
+import { getSourceData } from "./utils";
 
 const App = () => {
   const sourceData = useMemo(getSourceData, []);
-  const sortOptions = useMemo(getSortOptions, []);
-  const filterOptions = useMemo(getFilterOptions, []);
+
   const list = useList<typeof sourceData[0]>();
   useEffect(() => {
     list.load(sourceData);
     // @ts-ignore
-    list.sort(...sortOptions[0].value);
+    onSortAge("asc");
     list.setPageSize(10);
   }, []);
+
+  function onSortAge(order: "asc" | "desc") {
+    list.sort("age", order);
+  }
+
+  function onFilterSex(val: string) {
+    list.filter({
+      sex: val
+    });
+  }
+
+  function onSearchNameAndEmail(val: string) {
+    list.search(val, ["name", "email"]);
+  }
+
+  function onPaginate(currentPage: number) {
+    list.setCurrentPage(currentPage);
+  }
+
   return (
     <div>
       <div className="container">
@@ -24,7 +42,7 @@ const App = () => {
             className="input search"
             placeholder="Search name or email..."
             onInput={e => {
-              list.search(e.currentTarget.value, ["name", "email"]);
+              onSearchNameAndEmail(e.currentTarget.value);
             }}
           ></input>
           <label className="label">Total: {list.total}</label>
@@ -32,26 +50,23 @@ const App = () => {
           <div className="select">
             <select
               onChange={e => {
-                //@ts-ignore
-                list.sort(...e.currentTarget.value.split(","));
+                // @ts-ignore
+                onSortAge(e.currentTarget.value);
               }}
             >
-              {sortOptions.map(item => (
-                <option value={item.value}>{item.label}</option>
-              ))}
+              <option value="asc">Youngest</option>
+              <option value="desc">Reserve youngest</option>
             </select>
           </div>
           <div className="select">
             <select
               onChange={e => {
-                list.filter({
-                  sex: e.currentTarget.value
-                });
+                onFilterSex(e.currentTarget.value);
               }}
             >
-              {filterOptions.map(item => (
-                <option value={item.value}>{item.label}</option>
-              ))}
+              <option value="">All</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
             </select>
           </div>
         </div>
@@ -78,7 +93,7 @@ const App = () => {
         <Pagination
           pages={list.pageCount}
           currentPage={list.currentPage}
-          onChange={page => list.setCurrentPage(page)}
+          onChange={page => onPaginate(page)}
         ></Pagination>
       </div>
     </div>
