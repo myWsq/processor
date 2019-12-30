@@ -20,7 +20,8 @@
     "sass": "^1.24.0"
   },
   "scripts": {
-    "dev": "parcel src/index.html"
+    "dev": "parcel src/index.html",
+    "build":"parcel build src/index.html"
   },
   "keywords": [],
   "author": "",
