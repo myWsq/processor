@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module":"es2015",
+    "module": "commonjs",
     "lib": ["es2015", "es2016", "es2017", "dom"],
     "strict": true,
     "sourceMap": true,
@@ -10,11 +10,9 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "typeRoots": ["node_modules/@types"],
+    "declarationDir": "dist",
+    "outDir": "dist"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

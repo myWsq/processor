@@ -7,16 +7,20 @@
   "unpkg": "dist/query-it.umd.js",
   "typings": "dist/query-it.d.ts",
   "dependencies": {
-    "lodash": "^4.17.15"
+    "lodash.debounce": "^4.0.8",
+    "lodash.orderby": "^4.6.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.149",
+    "@types/lodash.debounce": "^4.0.6",
+    "@types/lodash.orderby": "^4.6.6",
     "microbundle": "^0.11.0",
+    "parcel-bundler": "^1.12.4",
+    "ts-node": "^8.5.4",
     "typescript": "^3.7.4"
   },
   "scripts": {
-    "build": "microbundle --external none",
-    "dev": "microbundle watch"
+    "build": "tsc && parcel build src/query-it.ts --global QueryIt",
+    "test": "ts-node test/query-it.ts"
   },
   "files": [
     "dist"
