@@ -7,7 +7,6 @@
     "@vue/composition-api": "^0.3.4",
     "bulma-pagination-react": "^0.1.1",
     "mockjs": "^1.1.0",
-    "query-it": "^2.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "vue": "^2.6.11",
@@ -17,7 +16,8 @@
   "devDependencies": {
     "@types/react": "^16.9.17",
     "@vue/component-compiler-utils": "^3.1.0",
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.24.0"
   },
   "scripts": {
     "dev": "parcel src/index.html"

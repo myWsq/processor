@@ -24,3 +24,16 @@ h1 {
 .spacer {
   flex-grow: 1;
 }
+
+.level-item.name {
+  min-width: 270px;
+  justify-content: flex-start;
+}
+
+.level-item {
+  min-width: 4em;
+}
+
+.level-item  + .level-item {
+  margin-left: 1em;
+}

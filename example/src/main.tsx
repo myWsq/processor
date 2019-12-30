@@ -5,9 +5,15 @@ import Vue from "vue";
 import ReactApp from "./App.tsx";
 // @ts-ignore
 import VueApp from "./App.vue";
-import './style';
+
+import VueCompositionAPI from "@vue/composition-api";
+
+import "./style";
 
 ReactDOM.render(<ReactApp />, document.getElementById("react-root"));
+
+Vue.use(VueCompositionAPI);
+
 new Vue({
   render: h => h(VueApp)
 }).$mount("#vue-root");

@@ -1,7 +1,7 @@
 import { Random } from "mockjs";
 
-export function getSourceData() {
-  return Array.from({ length: 500 }).map(() => {
+export function getSourceData(count: number) {
+  return Array.from({ length: count }).map(() => {
     return {
       name: Random.name(),
       age: Random.natural(10, 20),

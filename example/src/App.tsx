@@ -5,7 +5,7 @@ import Pagination from "bulma-pagination-react";
 import { getSourceData } from "./utils";
 
 const App = () => {
-  const sourceData = useMemo(getSourceData, []);
+  const sourceData = useMemo(() => getSourceData(500), []);
 
   const list = useList<typeof sourceData[0]>();
   useEffect(() => {
