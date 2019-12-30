@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/myWsq/query-it.svg?style=svg)](https://circleci.com/gh/myWsq/query-it) ![Size badge](https://img.shields.io/bundlephobia/minzip/query-it) ![License badge](https://img.shields.io/github/license/myWsq/query-it)
 
-> Pure Javascript  data processing tool. Including filter, sort, search, paginate. 
+> Pure Javascript data processing tool. Including filter, sort, search, paginate. 
 
 [Live Demo](https://mywsq.github.io/query-it/)
 

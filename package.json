@@ -3,6 +3,7 @@
   "version": "1.2.0",
   "main": "dist/query-it.js",
   "typings": "dist/query-it.d.ts",
+  "description": "Pure Javascript data processing tool. Including filter, sort, search, paginate.",
   "dependencies": {
     "lodash.debounce": "^4.0.8",
     "lodash.orderby": "^4.6.0"
