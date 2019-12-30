@@ -13,7 +13,6 @@
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.orderby": "^4.6.6",
-    "microbundle": "^0.11.0",
     "parcel-bundler": "^1.12.4",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.4"
