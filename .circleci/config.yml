@@ -34,9 +34,10 @@ jobs:
   deploy:
     docker:
       - image: circleci/node
-    working_directory: ~/repo/example
+    working_directory: ~/repo
     steps:
-      - run: yarn && yarn build
+      - checkout
+      - run: cd example && yarn && yarn build
 
       - add_ssh_keys:
           fingerprints:
