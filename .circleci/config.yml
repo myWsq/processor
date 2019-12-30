@@ -42,7 +42,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "18:38:dd:2a:bb:ff:68:52:f7:32:3d:a6:a9:47:1c:62"
-      
+
       - run:
           name: Install and configure dependencies
           command: |
@@ -60,5 +60,11 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
-      - deploy
+      - build:
+        filters:
+          branches:
+            only: master
+      - deploy:
+          filters:
+            branches:
+              only: master
