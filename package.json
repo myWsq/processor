@@ -1,6 +1,6 @@
 {
   "name": "query-it",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "main": "dist/query-it.js",
   "typings": "dist/query-it.d.ts",
   "dependencies": {
@@ -27,5 +27,5 @@
     "data"
   ],
   "license": "MIT",
-  "repository":"myWsq/query-it"
+  "repository": "myWsq/query-it"
 }
