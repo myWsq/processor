@@ -1,0 +1,24 @@
+{
+  "name": "query-it",
+  "version": "2.0.0",
+  "source": "src/query-it.ts",
+  "main": "dist/query-it.js",
+  "module": "dist/query-it.mjs.js",
+  "unpkg": "dist/query-it.umd.js",
+  "typings": "dist/query-it.d.ts",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.149",
+    "microbundle": "^0.11.0",
+    "typescript": "^3.7.4"
+  },
+  "scripts": {
+    "build": "microbundle --external none",
+    "dev": "microbundle watch"
+  },
+  "files": [
+    "dist"
+  ]
+}

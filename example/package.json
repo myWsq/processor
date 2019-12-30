@@ -1,0 +1,28 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@vue/composition-api": "^0.3.4",
+    "bulma-pagination-react": "^0.1.1",
+    "mockjs": "^1.1.0",
+    "query-it": "^2.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "vue": "^2.6.11",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.17",
+    "@vue/component-compiler-utils": "^3.1.0",
+    "parcel-bundler": "^1.12.4"
+  },
+  "scripts": {
+    "dev": "parcel src/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
