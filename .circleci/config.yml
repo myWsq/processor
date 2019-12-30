@@ -54,7 +54,7 @@ jobs:
           name: Deploy docs to gh-pages branch
           command: |
             export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
-            gh-pages --dist dist
+            gh-pages --dist example/dist
 
 workflows:
   version: 2
