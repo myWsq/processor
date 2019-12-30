@@ -15,7 +15,7 @@ export default class List<T = any> {
    * @param onChange On Update
    * @param wait Hooks debounce waiting time
    */
-  constructor(onChange?: () => void, wait: number = 200) {
+  constructor(onChange?: () => void, wait: number = 0) {
     function onUpdate() {
       onChange && onChange();
     }
