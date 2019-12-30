@@ -6,8 +6,8 @@ import {
   SortOrder
 } from "./types";
 import { filterData, searchData, paginateData } from "./utils";
-import orderBy from "lodash.orderBy";
-import debounce from "lodash.debounce";
+import orderBy from "lodash.orderby";
+import debounce from "lodash/debounce";
 
 export default class QueryIt<T = any> {
   /**
