@@ -46,13 +46,15 @@ jobs:
       - run:
           name: Install and configure dependencies
           command: |
-            npm install -g gh-pages
+            yarn global add gh-pages
             git config user.email "deploy@circleci.com"
             git config user.name "deploy"
 
       - run:
           name: Deploy docs to gh-pages branch
-          command: gh-pages --dist dist
+          command: |
+            export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
+            gh-pages --dist dist
 
 workflows:
   version: 2
