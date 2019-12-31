@@ -93,7 +93,7 @@ Loading source data and init states.
 Searching by text and fields. 
 
 ```js
-query.search("pa", ["name"]); // field name or email including "pa"
+query.search("pa", ["name", "email"]); // field name or email including "pa"
 ```
 
 You can also provide your custom search strategy.
