@@ -190,7 +190,7 @@ It should work well but unfortunately doesn't. Because the `reactive` rewrite th
 
 ```ts
 import QueryIt from "query-it";
-import { reactive } from "@vue/composition-api";
+import { reactive, ref } from "@vue/composition-api";
 
 export default function useQueryIt<T>(wait: number = 0) {
   const query = new QueryIt<T>(() => {
