@@ -72,8 +72,8 @@ export default class QueryIt<T = any> {
     this.onUpdate();
   }
 
-  sort(callbackFn: SortFunction<T>): void;
   sort(columns: string | string[], order: SortOrder | SortOrder[]): void;
+  sort(callbackFn: SortFunction<T>): void;
   sort(callbackOrColumns: any, order?: any) {
     this._sortArgs = arguments;
     this._currentPage = 1;
@@ -81,8 +81,8 @@ export default class QueryIt<T = any> {
     this.onUpdate();
   }
 
-  search(callbackFn: SearchFunction<T>): void;
   search(text: string, columns?: string[]): void;
+  search(callbackFn: SearchFunction<T>): void;
   search(callbackOrText: SearchFunction<T> | string, columns?: string[]) {
     this._searchArgs = arguments;
     this._currentPage = 1;
