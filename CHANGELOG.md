@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/myWsq/query-it/compare/v1.2.0...v1.3.0) (2019-12-31)
+
+
+### Features
+
+* 调整参数定义顺序 ([1562fa8](https://github.com/myWsq/query-it/commit/1562fa8))
+
 ## [1.2.0](https://github.com/myWsq/query-it/compare/v1.1.2...v1.2.0) (2019-12-30)
 
 
