@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/myWsq/query-it/compare/v1.3.0...v1.3.1) (2020-01-09)
+
+
+### Bug Fixes
+
+* 修改item的类型提示 ([21b596b](https://github.com/myWsq/query-it/commit/21b596b))
+
 ## [1.3.0](https://github.com/myWsq/query-it/compare/v1.2.0...v1.3.0) (2019-12-31)
 
 
