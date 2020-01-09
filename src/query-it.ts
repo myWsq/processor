@@ -24,7 +24,7 @@ export default class QueryIt<T = any> {
 
   onUpdate: () => void;
 
-  get items() {
+  get items(): T[] {
     return paginateData(
       this._paginationCache,
       this._currentPage,
@@ -34,7 +34,7 @@ export default class QueryIt<T = any> {
   /**
    * 未分页的记录总数
    */
-  get total() {
+  get total(): number {
     return this._paginationCache.length;
   }
 
