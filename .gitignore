@@ -2,3 +2,4 @@ node_modules
 .eslintcache
 dist
 .DS_Store
+coverage/

@@ -1,4 +1,4 @@
-type DataHandler<T> = (data: T[]) => void;
+export type DataHandler<T> = (data: T[]) => void;
 
 export function createQuery<T>() {
   let data: T[] = [];
