@@ -1,11 +1,13 @@
 {
-  "name": "@processor/core",
+  "name": "@processor/react",
   "version": "1.0.0",
-  "description": "A brilliant JavaScript data processing tool.",
+  "description": "Processor react plugin.",
   "keywords": [
     "data",
     "data-processing",
-    "processor"
+    "processor",
+    "react",
+    "react-hooks"
   ],
   "author": "myWsq <wsq961@outlook.com>",
   "repository": "https://github.com/myWsq/processor.git",
@@ -21,7 +23,6 @@
   "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "microbundle",
-    "test": "majestic"
+    "build": "microbundle"
   }
 }
