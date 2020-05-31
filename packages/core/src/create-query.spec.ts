@@ -1,4 +1,4 @@
-import { createQuery } from "./core";
+import { createQuery } from "./create-query";
 const data = [
   { name: "test1", age: 16 },
   { name: "test0", age: 18 },

@@ -1,0 +1,17 @@
+{
+  "name": "@processor/core",
+  "version": "1.0.0",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "esmodule": "dist/index.modern.js",
+  "unpkg": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "microbundle",
+    "test": "majestic"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/myWsq/query-it.git",
+  "author": "myWsq <wsq961@outlook.com>"
+}

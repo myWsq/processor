@@ -1,17 +1,14 @@
 {
-  "name": "query-it",
+  "name": "processor-root",
+  "private": true,
   "version": "1.0.0",
-  "source": "src/index.ts",
-  "main": "dist/query-it.js",
-  "module": "dist/query-it.module.js",
-  "esmodule": "dist/query-it.modern.js",
-  "unpkg": "dist/query-it.umd.js",
-  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "microbundle",
-    "lint": "eslint . --fix",
-    "test": "majestic"
+    "build": "lerna run build --stream",
+    "lint": "eslint . --fix"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -23,9 +20,6 @@
   "eslintIgnore": [
     "**/*.js"
   ],
-  "license": "MIT",
-  "repository": "https://github.com/myWsq/query-it.git",
-  "author": "myWsq <wsq961@outlook.com>",
   "devDependencies": {
     "@types/jest": "^25.2.3",
     "@typescript-eslint/eslint-plugin": "^3.0.2",
@@ -34,6 +28,7 @@
     "eslint-config-prettier": "^6.11.0",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
+    "lerna": "^3.22.0",
     "lint-staged": "^10.2.7",
     "majestic": "^1.7.0",
     "microbundle": "^0.12.0",
