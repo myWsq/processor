@@ -1,32 +1,36 @@
 {
   "name": "query-it",
-  "version": "1.3.1",
+  "version": "1.0.0",
+  "source": "src/index.ts",
   "main": "dist/query-it.js",
-  "typings": "dist/query-it.d.ts",
-  "description": "Pure Javascript data processing tool. Including filter, sort, search, paginate.",
-  "dependencies": {
-    "lodash.debounce": "^4.0.8",
-    "lodash.orderby": "^4.6.0"
-  },
-  "devDependencies": {
-    "@types/lodash.debounce": "^4.0.6",
-    "@types/lodash.orderby": "^4.6.6",
-    "parcel-bundler": "^1.12.4",
-    "ts-node": "^8.5.4",
-    "typescript": "^3.7.4"
-  },
+  "module": "dist/query-it.module.js",
+  "esmodule": "dist/query-it.modern.js",
+  "unpkg": "dist/query-it.umd.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc && parcel build src/query-it.ts --global QueryIt",
-    "test": "ts-node test/query-it.ts"
+    "build": "microbundle",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx  --cache --fix"
   },
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "list",
-    "query",
-    "data"
-  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache --fix"
+  },
   "license": "MIT",
-  "repository": "myWsq/query-it"
+  "repository": "https://github.com/myWsq/query-it.git",
+  "author": "myWsq <wsq961@outlook.com>",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.0.2",
+    "@typescript-eslint/parser": "^3.0.2",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.7",
+    "microbundle": "^0.12.0",
+    "prettier": "^2.0.5",
+    "standard-version": "^8.0.0"
+  }
 }

@@ -1,5 +1,4 @@
-.DS_Store
 node_modules
+.eslintcache
 dist
-.rts2_cache_*
-.cache
+.DS_Store
