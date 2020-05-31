@@ -1,6 +1,6 @@
 {
   "name": "@processor/core",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.0",
   "description": "A brilliant JavaScript data processing tool.",
   "keywords": [
     "data",
