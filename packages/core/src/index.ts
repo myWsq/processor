@@ -1,1 +1,1 @@
-export * from "./create-query";
+export * from "./create-processor";

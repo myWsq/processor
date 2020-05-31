@@ -23,6 +23,15 @@
   "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "microbundle"
+    "build": "microbundle --globals @processor/core=Processor"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.35"
+  },
+  "dependencies": {
+    "@processor/core": "^1.0.0"
   }
 }

@@ -26,7 +26,7 @@ function isEqual(target: any, expect: any): boolean {
 }
 
 // Main
-export function createQuery<T extends SourceData>(source?: T[]) {
+export function createProcessor<T extends SourceData>(source?: T[]) {
   const store = {
     filter: {
       cache: [] as T[],

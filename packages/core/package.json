@@ -21,7 +21,7 @@
   "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "microbundle",
+    "build": "microbundle --name Processor",
     "test": "majestic"
   }
 }

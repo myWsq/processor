@@ -1,4 +1,4 @@
-import { createQuery } from "./create-query";
+import { createProcessor } from "./create-processor";
 const data = [
   { name: "test1", age: 16 },
   { name: "test0", age: 18 },
@@ -7,13 +7,13 @@ const data = [
 ];
 
 test("load", () => {
-  const query = createQuery();
+  const query = createProcessor();
   query.load(data);
   expect(query.exec().current).toEqual(data);
 });
 
 describe("Baisc filter", () => {
-  const query = createQuery(data);
+  const query = createProcessor(data);
 
   test("single field with single condition", () => {
     query.filter({ name: "test0" });
@@ -42,7 +42,7 @@ describe("Baisc filter", () => {
 });
 
 describe("Basic search", () => {
-  const query = createQuery(data);
+  const query = createProcessor(data);
 
   test("search text on all of fields", () => {
     query.search("test0");
@@ -63,7 +63,7 @@ describe("Basic search", () => {
 });
 
 describe("Basic sort", () => {
-  const query = createQuery(data);
+  const query = createProcessor(data);
 
   test("single field asc", () => {
     query.sort("name");
@@ -87,7 +87,7 @@ describe("Basic sort", () => {
 });
 
 describe("Basic page", () => {
-  const query = createQuery(data);
+  const query = createProcessor(data);
 
   test("paging", () => {
     query.page(2, 1);
@@ -106,19 +106,19 @@ describe("Basic page", () => {
 
 describe("Chain", () => {
   test("filter and search", () => {
-    const query = createQuery(data);
+    const query = createProcessor(data);
     query.filter({ name: "test1" }).search("11");
     expect(query.exec().current).toEqual([data[3]]);
   });
 
   test("search and sort", () => {
-    const query = createQuery(data);
+    const query = createProcessor(data);
     query.search("test1").sort("age");
     expect(query.exec().current).toEqual([data[3], data[0]]);
   });
 
   test("search and sort page", () => {
-    const query = createQuery(data);
+    const query = createProcessor(data);
     query.search("test1").sort("age").page(2, 1);
     expect(query.exec().current).toEqual([data[0]]);
   });
