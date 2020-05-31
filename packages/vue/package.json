@@ -1,13 +1,14 @@
 {
-  "name": "@processor/react",
+  "name": "@processor/vue",
   "version": "1.0.0",
-  "description": "Processor react plugin.",
+  "description": "Processor vue plugin.",
   "keywords": [
     "data",
     "data-processing",
     "processor",
-    "react",
-    "react-hooks"
+    "vue",
+    "vue3",
+    "composition-api"
   ],
   "author": "myWsq <wsq961@outlook.com>",
   "repository": "https://github.com/myWsq/processor.git",
@@ -23,16 +24,13 @@
   "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "microbundle  --external react --name ProcessorReact"
+    "build": "microbundle --external vue --name ProcessorVue"
   },
   "peerDependencies": {
-    "react": ">=16.8.0"
-  },
-  "devDependencies": {
-    "@types/react": "^16.9.35"
+    "vue": ">=3.0.0"
   },
   "dependencies": {
     "@processor/core": "^1.0.0",
-    "react": "^16.13.1"
+    "vue": "^3.0.0-beta.14"
   }
 }
