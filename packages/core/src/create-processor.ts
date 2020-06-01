@@ -92,7 +92,7 @@ export interface Result<T> {
   /** Total number of data handled by filter, search, sort  */
   total: number;
 }
-export type OnUpdateCallback<T> = (result: Result<T>) => Processor<T>;
+export type OnUpdateCallback<T> = (result: Result<T>) => void;
 
 // Utils
 // --------------------------------
@@ -112,22 +112,6 @@ function isEqual(target: any, expect: any): boolean {
   }
 }
 
-export function debounce<T extends (...args: any[]) => any>(
-  func: T,
-  wait: number,
-  immediate = false
-) {
-  let timeout: number | undefined;
-  return function (this: any, ...args: Parameters<T>) {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      timeout = undefined;
-      if (!immediate) func.apply(this, args);
-    }, wait);
-    if (immediate && !timeout) func.apply(this, args);
-  };
-}
-
 // Main
 // --------------------------------
 /**
@@ -136,8 +120,7 @@ export function debounce<T extends (...args: any[]) => any>(
  * @param wait - debounce wating time (ms). Default 10.
  */
 export function createProcessor<T extends SourceData>(
-  source?: T[],
-  wait = 10
+  source?: T[]
 ): Processor<T> {
   const state = {
     filter: {
@@ -195,14 +178,12 @@ export function createProcessor<T extends SourceData>(
     onUpdateHandler && onUpdateHandler(state.page.cache);
   }
 
-  const debounceCalc = debounce(calc, wait);
-
   // processor instance
   const processor: Processor<T> = {
     // load
     load(source: T[]) {
       data = source.concat();
-      debounceCalc(["filter", "search", "sort", "page"]);
+      calc(["filter", "search", "sort", "page"]);
       return processor;
     },
     // Filter
@@ -216,7 +197,7 @@ export function createProcessor<T extends SourceData>(
           })
         );
       };
-      debounceCalc(["filter", "search", "sort", "page"]);
+      calc(["filter", "search", "sort", "page"]);
       return processor;
     },
     // search
@@ -236,7 +217,7 @@ export function createProcessor<T extends SourceData>(
           );
         });
       };
-      debounceCalc(["search", "sort", "page"]);
+      calc(["search", "sort", "page"]);
       return processor;
     },
     // sort
@@ -261,34 +242,35 @@ export function createProcessor<T extends SourceData>(
           return d;
         }
       };
-      debounceCalc(["sort", "page"]);
+      calc(["sort", "page"]);
       return processor;
     },
     // page
     page(size, current = 1): typeof processor {
       state.page.handler = (d) => {
+        const total = d.length;
         if (!size || size <= 0) {
           return {
             current: d.concat(),
             page: 1,
             pageCount: 1,
-            total: d.length,
+            total,
           };
         }
         if (current < 1) {
           current = 1;
         }
-        const pageCount = Math.ceil(d.length / size);
+        const pageCount = Math.ceil(total / size);
         current = Math.min(current, pageCount);
 
         return {
           current: d.slice((current - 1) * size, current * size),
           page: current,
-          total: d.length,
+          total,
           pageCount,
         };
       };
-      debounceCalc(["page"]);
+      calc(["page"]);
       return processor;
     },
     onUpdate(func) {
