@@ -1,6 +1,6 @@
 {
   "name": "@processor/vue",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Processor vue plugin.",
   "keywords": [
     "data",
@@ -30,7 +30,7 @@
     "vue": ">=3.0.0"
   },
   "dependencies": {
-    "@processor/core": "^1.0.0-alpha.0",
+    "@processor/core": "^1.0.0-alpha.1",
     "vue": "^3.0.0-beta.14"
   }
 }
