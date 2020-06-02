@@ -1,17 +1,15 @@
-import { ref, reactive } from "@vue/composition-api";
-import { createProcessor, Result } from "@processor/core";
+import { reactive } from "@vue/composition-api";
+import { createProcessor } from "@processor/core";
 export function useProcessor<T>(data?: T[]) {
   const processor = createProcessor(data);
-  const result = ref<Result<T>>(processor.exec());
-
-  processor.exec = () => {
-    const res = processor.exec();
-    result.value = res;
-    return res;
-  };
-
-  return reactive({
+  const result = reactive(processor.exec());
+  processor.onUpdate((res) => {
+    for (const key in res) {
+      result[key] = res[key];
+    }
+  });
+  return {
     processor,
     result,
-  });
+  };
 }

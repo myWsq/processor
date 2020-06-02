@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "lerna run build --stream",
+    "dev": "lerna run dev --parallel",
     "lint": "eslint . --fix",
     "postpack": "npm run build"
   },

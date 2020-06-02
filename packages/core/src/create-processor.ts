@@ -151,7 +151,7 @@ export function createProcessor<T extends SourceData>(
       cache: {
         current: [],
         page: 1,
-        pageCount: 0,
+        pageCount: 1,
         total: 0,
       } as Result<T>,
       handler: (data: T[]) => ({
@@ -246,7 +246,7 @@ export function createProcessor<T extends SourceData>(
       return processor;
     },
     // page
-    page(size, current = 1): typeof processor {
+    page(size, current = 1) {
       state.page.handler = (d) => {
         const total = d.length;
         if (!size || size <= 0) {
