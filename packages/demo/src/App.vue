@@ -1,52 +1,61 @@
 <template>
   <div>
-    <p>total: {{result.total}}</p>
-    <input placeholder="Search by name" v-model="nameSearchInput">
-    <table>
-      <th>
-        <td>id</td>
-        <td>name</td>
-        <td>age</td>
-      </th>
-      <tr v-for="row in result.current" :key="row.id">
-        <td>{{row.id}}</td>
-        <td>{{row.name}}</td>
-        <td>{{row.age}}</td>
-      </tr>
-    </table>
+    <nav class="uk-padding-small">
+      <div class="nav-item">
+        <span class="uk-text-lead">Processor</span>
+        <span class="description uk-text-meta"
+          >A simple and lightweight JavaScript data processing tool</span
+        >
+      </div>
+      <div class="nav-item">
+        <a
+          class="uk-link-muted"
+          href="https://github.com/myWsq/processor"
+          target="_blank"
+          >Github / Documentation</a
+        >
+        <a class="uk-link-muted" href="#">Demo Source Code</a>
+      </div>
+    </nav>
+    <main>
+      <DataTable></DataTable>
+    </main>
   </div>
 </template>
 
 <script>
-import { useProcessor } from "./useProcessor";
-import Mock from "mockjs";
-import { ref, watch, defineComponent } from "vue";
-
+import { ref, watch, defineComponent, computed } from "vue";
+import DataTable from "../components/DataTable.vue";
 export default defineComponent({
-  setup() {
-    const data = Mock.mock({
-      "list|300": [
-        {
-          "id|+1": 1,
-          name: "@NAME",
-          "age|15-21": 15
-        }
-      ]
-    });
-    const { processor, result } = useProcessor(data.list);
-    processor.page(20).exec();
-    const nameSearchInput = ref("");
-    watch(nameSearchInput, val => {
-      processor.search(val, ["name"]).exec();
-    });
-
-    return {
-      result,
-      nameSearchInput
-    };
-  }
+  components: {
+    DataTable,
+  },
+  setup() {},
 });
 </script>
 
-<style>
+<style scoped>
+nav {
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  background: rgb(29, 29, 29);
+}
+
+nav .uk-text-lead {
+  color: #fff;
+}
+nav .uk-link-muted {
+  color: #fff;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+.description {
+  margin-left: 1em;
+}
+a + a {
+  margin-left: 1em;
+}
 </style>

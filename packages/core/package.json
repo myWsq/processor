@@ -1,7 +1,7 @@
 {
   "name": "@processor/core",
   "version": "1.0.0-alpha.1",
-  "description": "A brilliant JavaScript data processing tool.",
+  "description": "A simple and lightweight JavaScript data processing tool.",
   "keywords": [
     "data",
     "data-processing",

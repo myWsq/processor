@@ -112,6 +112,10 @@ function isEqual(target: any, expect: any): boolean {
   }
 }
 
+function isExists(target: any) {
+  return typeof target !== "undefined";
+}
+
 // Main
 // --------------------------------
 /**
@@ -193,7 +197,11 @@ export function createProcessor<T extends SourceData>(
           Object.keys(option).every((field) => {
             const target = item[field];
             const expects = toArray(option[field]);
-            return expects.some((expect) => isEqual(target, expect));
+            return expects.some(
+              (expect) => {
+                return !isExists(expect) || isEqual(target, expect)
+              }
+            );
           })
         );
       };

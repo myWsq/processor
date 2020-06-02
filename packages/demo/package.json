@@ -7,7 +7,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@processor/core": "^1.0.0-alpha.1",
+    "@processor/vue": "^1.0.0-alpha.1",
     "mockjs": "^1.1.0",
     "vue": "^3.0.0-beta.14"
   },

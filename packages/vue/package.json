@@ -24,7 +24,8 @@
   "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "microbundle --external vue --name ProcessorVue"
+    "build": "microbundle --external vue --name ProcessorVue",
+    "dev": "microbundle watch"
   },
   "peerDependencies": {
     "vue": ">=3.0.0"
