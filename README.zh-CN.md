@@ -1,14 +1,14 @@
 # Processor
 
-> A simple and lightweight JavaScript data processing tool.
+> 一个轻量级的 JavaScript 数据处理工具.
 
 [English](../README.md) | [简体中文](../README.zh-CN.md)
 
-Generally, data is processed by the server, and the frontend application interacts with the server through the API. However, when dealing with simple data, we can leave this work to the browser which can effectively reduce the number of network requests and improve the user experience. Moreover, it is very simple to develop.
+一般来说, 数据处理会在服务端进行, 前端通过 API 与服务端交互获得处理结果. 然而面对简单的数据时, 我们可以把这个工作交给浏览器来做, 这样可以有效减少网络请求的数量, 提升用户体验. 更重要的是, 开发起来非常容易.
 
-**Processor** is such a tool which can help you processing data on the frontend.
+**Processor** 就是一款帮助你在前端进行数据处理的工具.
 
-## Installnation
+## 安装
 
 **npm**
 
@@ -26,9 +26,9 @@ $ yarn add @processor/core
 
 [jsDelivr](https://www.jsdelivr.com/package/npm/@processor/core)
 
-## Usage
+## 使用
 
-First of all, you should create a instance of `processor`. You can pass by source data when created it.
+首先, 你需要创建一个 `processor` 实例. 你可以在实例化时传入源数据.
 
 ```javascript
 import { createProcessor } from "@processor/core";
@@ -42,48 +42,48 @@ const data = [
 const processor = createProcessor(data);
 ```
 
-Or provide data later by method `load`.
+或者创建完成后使用 `load` 方法提供数据.
 
 ```javascript
 const processor = createProcessor();
 processor.load(data);
 ```
 
-### Listen update event
+### 监听 update 事件
 
-Call `onUpdate` to register callback function on processor instance to get the result after processing.
+调用 `onUpdate` 可以在 processor 实例上注册一个回调函数用于获取结果.
 
 ```javascript
 processor.onUpdate((result) => {
   console.log(result);
 });
 
-// result
+// 结果
 {
   current: [
      { name: "Michael Hall", age: 18, sex: "female" }
      ...
-  ], // current entries
-  page: 1, // current page number
-  pageCount: 4, // page count
-  total: 4 // total number of entries
+  ], // 当前的条目
+  page: 1, // 当前是第几页
+  pageCount: 4, // 总页数
+  total: 4 // 条目总数
 }
 ```
 
-### Pagination
+### 分页
 
 `page(size?: number, current?: number) => Processor`
 
-Call `page` to set the **maximum number** of entries per page and **current page number**. If `size` equal or less then `0`, it will return all of entries.
+调用 `page` 方法可以设置每页最多的条目数量和当前页. 如果 `size` 被设置为一个小于等于 `0` 的数字, 则会返回全部条目.
 
 ```javascript
 processor.page(1, 2); // maximum 1 entry per page and switch to second page.
 processor.page(); // all of entries
 ```
 
-### Sort
+### 排序
 
-Same with [lodash/orderby](https://lodash.com/docs/4.17.15#orderBy). You can also provide a custom sort function like `Array.sort`
+与 [lodash/orderby](https://lodash.com/docs/4.17.15#orderBy) 很像. 你也可以提供一个自定义的排序方法就像 `Array.sort`.
 
 ```javascript
 processor.sort("name"); // single field asc
@@ -93,18 +93,18 @@ processor.sort(["name", "age"], ["acs", "desc"]); // multiple fields with differ
 processor.sort((a, b) => a > b); // custom sort function
 ```
 
-### Search
+### 搜索
 
 `search(str: string, fields?: string[]) => Processor`
 
-The default search strategy is **"If any field of entry matched, it is considered valid"**. You can provide a searching range.
+默认的搜索策略是 **"某条数据的任何字段匹配, 那么就认为这条数据是有效的"**. 你可以提供搜索的范围.
 
 ```javascript
-processor.search("pat"); // search all of fields
-processor.search("pat", ["name"]); // only search field "name"
+processor.search("pat"); // 搜索全部字段
+processor.search("pat", ["name"]); // 只搜索 "name" 字段
 ```
 
-Or you can also provide a custom search strategy.
+或者你也可以提供一个自定义的搜索策略.
 
 ```javascript
 processor.search((entires) => [...]);
@@ -112,7 +112,7 @@ processor.search((entires) => [...]);
 
 ### Filter
 
-The `filter` is a quite flexible method, just see the example code below.
+`filter` 方法非常灵活, 你可以观察下面的示例代码.
 
 ```javascript
 // name === "Patricia Clark"
@@ -125,23 +125,23 @@ processor.filter({ age: (val) => val > 16 });
 processor.filter({ sex: "female", age: (val) => val > 16 });
 ```
 
-The filter conditions can be combined at you will.
+这些筛选条件可以随意搭配.
 
 ### exec
 
-Calculate immediately and return the result.
+立即计算并返回结果.
 
 ```javascript
 const result = processor.page(2).filter({ sex: "female" }).search("Tho").exec();
 ```
 
-## How to use with Vue
+## 如何与 Vue 配合使用
 
-Processor provide two packages for vue.
+Processor 为 Vue 提供了两个包.
 
 ### Vue 2.x
 
-You should install the [Composition API Plugin][https://github.com/vuejs/composition-api] before.
+首先, 你需要安装 [Composition API Plugin][https://github.com/vuejs/composition-api].
 
 **npm**
 
@@ -210,9 +210,9 @@ import { useProcessor } from "@processor/vue";
 const { processor, result } = useProcessor(data);
 ```
 
-## How to use with React
+## 如何与 React 配合使用
 
-**Need react version >=16.8.0.**
+**需要 react 版本 >=16.8.0.**
 
 **npm**
 
