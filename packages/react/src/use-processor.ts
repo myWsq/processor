@@ -5,7 +5,7 @@ export function useProcessor<T>(data?: T[]) {
   const processor = useMemo(() => createProcessor(data), [data]);
   const [result, setResult] = useState(processor.exec());
   processor.onUpdate((res) => {
-    setResult(res)
+    setResult(res);
   });
-  return [processor, result];
+  return { processor, result };
 }
