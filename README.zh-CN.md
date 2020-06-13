@@ -2,7 +2,7 @@
 
 > 一个轻量级的 JavaScript 数据处理工具.
 
-[English](https://github.com/myWsq/processor) | [简体中文](https://github.com/myWsq/processor/blob/master/README.zh-CN.md)
+[English](./README.md) | [简体中文](./README.zh-CN.md)
 
 一般来说, 数据处理会在服务端进行, 前端通过 API 与服务端交互获得处理结果. 然而面对简单的数据时, 我们可以把这个工作交给浏览器来做, 这样可以有效减少网络请求的数量, 提升用户体验. 更重要的是, 开发起来非常容易.
 
