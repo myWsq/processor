@@ -2,7 +2,7 @@
 
 > A simple and lightweight JavaScript data processing tool.
 
-[English](./README.md) | [简体中文](./README.zh-CN.md)
+English | [简体中文](./README.zh-CN.md)
 
 Generally, data is processed by the server, and the frontend application interacts with the server through the API. However, when dealing with simple data, we can leave this work to the browser which can effectively reduce the number of network requests and improve the user experience. Moreover, it is very simple to develop.
 
@@ -141,7 +141,7 @@ Processor provide two packages for vue.
 
 ### Vue 2.x
 
-You should install the [Composition API Plugin][https://github.com/vuejs/composition-api] before.
+You should install the [Composition API Plugin](https://github.com/vuejs/composition-api) before.
 
 **npm**
 
