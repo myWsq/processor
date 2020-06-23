@@ -14,7 +14,12 @@
           target="_blank"
           >Github / Documentation</a
         >
-        <a class="uk-link-muted" href="#">Demo Source Code</a>
+        <a
+          class="uk-link-muted"
+          href="https://github.com/myWsq/processor/tree/master/packages/demo"
+          target="_blank"
+          >Demo Source Code</a
+        >
       </div>
     </nav>
     <main>
