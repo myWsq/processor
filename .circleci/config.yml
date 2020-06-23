@@ -21,13 +21,23 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: yarn lerna bootstrap
-
+      - run: yarn && yarn lerna bootstrap
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
       # run build!
       - run: yarn build
-      
+
+      # Deploy
+      - run:
+        name: Configure gh-pages
+        command: |
+          yarn global add gh-pages
+          git config user.email "ci@circleci.com"
+          git config user.name "CircleCI"
+
+      - add_ssh_keys:
+        fingerprints:
+          - "59:ad:fd:64:71:eb:81:01:6a:d7:1a:c9:0c:19:39:af"
+      - run: gh-pages -d packages/demo/dist
