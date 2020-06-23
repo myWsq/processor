@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base processor"
+    "build": "vite build --base /processor"
   },
   "dependencies": {
     "@processor/vue": "^1.0.0",
