@@ -8,12 +8,12 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node
-
     working_directory: ~/repo
-
+    branches:
+      only:
+        - master
     steps:
       - checkout
-
       # Download and cache dependencies
       - restore_cache:
           keys:

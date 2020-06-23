@@ -1,5 +1,7 @@
 # Processor
 
+[![CircleCI](https://circleci.com/gh/myWsq/processor.svg?style=shield)](https://app.circleci.com/pipelines/github/myWsq/processor) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@processor/core) ![npm (scoped)](https://img.shields.io/npm/v/@processor/core) ![NPM](https://img.shields.io/npm/l/@processor/core)
+
 > A simple and lightweight JavaScript data processing tool.
 
 English | [简体中文](./README.zh-CN.md)
