@@ -1,6 +1,12 @@
 <template>
   <div>
     <div class="filter-row uk-padding-small">
+      <button
+        class="uk-button uk-button-default reload-button"
+        @click="loadSource"
+      >
+        Reload
+      </button>
       <!-- search -->
       <div class="search-input uk-inline">
         <span class="uk-form-icon" uk-icon="icon: search"></span>
@@ -8,20 +14,22 @@
           class="uk-input"
           type="search"
           placeholder="Search by name..."
-          v-model="nameSearchInput"
+          v-model="config.searchOption"
         />
       </div>
       <!-- sex filter -->
-      <select class="uk-select filter-selector" v-model="sexFilter">
+      <select
+        class="uk-select filter-selector"
+        v-model="config.filterOption.sex"
+      >
         <option :value="undefined">Sex: All</option>
         <option value="male">Sex: Male</option>
         <option value="female">Sex: Female</option>
       </select>
       <!-- sort -->
-      <select class="uk-select filter-selector" v-model="sortArgs">
-        <option :value="['id']">Sort by ID</option>
-        <option :value="['age']">Sort by age</option>
-        <option :value="['age', 'desc']">Sort by age reverse</option>
+      <select class="uk-select filter-selector" v-model="config.sortOption">
+        <option value="id">Sort by ID</option>
+        <option value="age">Sort by age</option>
       </select>
     </div>
     <!-- main table -->
@@ -35,8 +43,8 @@
         </tr>
       </thead>
 
-      <tbody v-if="result.total">
-        <tr v-for="row in result.current" :key="row.id">
+      <tbody v-if="total">
+        <tr v-for="row in data" :key="row.id">
           <td>{{ row.id }}</td>
           <td>{{ row.name }}</td>
           <td>{{ row.sex }}</td>
@@ -50,8 +58,8 @@
     <!-- pagination -->
     <div class="table-footer">
       <div>
-        <span> Total: {{ result.total }} </span>
-        <select class="uk-select page-size-selector" v-model="pageSize">
+        <span> Total: {{ total }} </span>
+        <select class="uk-select page-size-selector" v-model="config.pageSize">
           <option :value="30">30 / page</option>
           <option :value="50">50 / page</option>
           <option :value="100">100 / page</option>
@@ -61,7 +69,7 @@
         <li :class="{ 'uk-disabled': prevDisabled }" @click="prev">
           <a href="#"><span uk-pagination-previous></span> Previous</a>
         </li>
-        <li>{{ result.page }}/{{ result.pageCount }}</li>
+        <li>{{ currentPage }}/{{ pageCount }}</li>
         <li :class="{ 'uk-disabled': nextDisabled }" @click="next">
           <a href="#">Next <span uk-pagination-next></span></a>
         </li>
@@ -73,67 +81,60 @@
 <script>
 import { useProcessor } from "@processor/vue";
 import Mock from "mockjs";
-import { ref, watch, defineComponent, computed } from "vue";
+import { defineComponent, reactive, computed } from "vue";
 
 export default defineComponent({
   setup() {
-    const data = Mock.mock({
-      "list|3000": [
-        {
-          "id|+1": 1,
-          name: "@NAME",
-          age: () => Mock.Random.integer(15, 21),
-          sex: () => Mock.Random.pick("male", "female"),
-        },
-      ],
+    const config = reactive({
+      source: [],
+      searchOption: "",
+      searchFields: ["name"],
+      filterOption: {
+        sex: undefined,
+      },
+      sortOption: "id",
+      pageSize: 30,
     });
-    const { processor, result } = useProcessor(data.list);
-    const nameSearchInput = ref("");
-    const pageSize = ref(30);
-    const sortArgs = ref(["id"]);
-    const sexFilter = ref(undefined);
-    const prevDisabled = computed(() => result.page === 1);
-    const nextDisabled = computed(() => result.page === result.pageCount);
+
+    const { pageCount, currentPage, total, data } = useProcessor(config);
+
+    const prevDisabled = computed(() => currentPage.value === 1);
+    const nextDisabled = computed(() => currentPage.value === pageCount.value);
 
     function next() {
-      processor.page(pageSize.value, result.page + 1);
+      currentPage.value++;
     }
 
     function prev() {
-      processor.page(pageSize.value, result.page - 1);
+      currentPage.value--;
     }
 
-    watch(
-      pageSize,
-      (val) => {
-        processor.page(val);
-      },
-      {
-        immediate: true,
-      }
-    );
-    watch(nameSearchInput, (val) => {
-      processor.search(val, ["name"]);
-    });
-    watch(sortArgs, (val) => {
-      processor.sort(...val);
-    });
-    watch(sexFilter, (val) => {
-      processor.filter({
-        sex: val,
-      });
-    });
+    function loadSource() {
+      config.source = Mock.mock({
+        "list|3000": [
+          {
+            "id|+1": 1,
+            name: "@NAME",
+            age: () => Mock.Random.integer(15, 21),
+            sex: () => Mock.Random.pick("male", "female"),
+          },
+        ],
+      }).list;
+    }
+
+    loadSource();
 
     return {
-      result,
-      nameSearchInput,
-      pageSize,
-      sortArgs,
-      sexFilter,
+      config,
+      pageCount,
+      currentPage,
       prevDisabled,
       nextDisabled,
       next,
       prev,
+      total,
+      data,
+      loadSource,
     };
   },
 });
@@ -167,5 +168,8 @@ export default defineComponent({
 .page-size-selector {
   width: 8em;
   margin-left: 1em;
+}
+.reload-button {
+  margin-right: 1em;
 }
 </style>

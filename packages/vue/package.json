@@ -7,6 +7,7 @@
     "data-processing",
     "processor",
     "vue",
+    "vue2",
     "vue3",
     "composition-api"
   ],
@@ -28,10 +29,19 @@
     "dev": "microbundle watch"
   },
   "peerDependencies": {
-    "vue": ">=3.0.0"
+    "@vue/composition-api": "^1.0.0-beta.1",
+    "vue": "^2.0.0 || >=3.0.0-rc.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@processor/core": "^1.0.0",
-    "vue": "^3.0.0-beta.14"
+    "vue-demi": "^0.9.1"
+  },
+  "devDependencies": {
+    "vue": "^3.0.11"
   }
 }
