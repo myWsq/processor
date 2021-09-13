@@ -1,13 +1,13 @@
 {
   "name": "demo",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build --base /processor"
   },
   "dependencies": {
-    "@processor/vue": "^1.0.0",
+    "@processor/vue": "^2.0.0",
     "mockjs": "^1.1.0",
     "vue": "^3.0.0-beta.14"
   },
