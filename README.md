@@ -139,7 +139,7 @@ const result = processor.page(2).filter({ sex: "female" }).search("Tho").exec();
 
 ## How to use with Vue
 
-Processor provide two packages for vue. From v2.0, it works for Vue 2 & 3 within a single package by the power of [Vue Demi](https://github.com/vueuse/vue-demi)!
+From v2.0, it works for Vue 2 & 3 within a single package by the power of [Vue Demi](https://github.com/vueuse/vue-demi)!
 
 For **Vue 2.x**, you should install the [Composition API Plugin](https://github.com/vuejs/composition-api) before.
 

@@ -139,22 +139,20 @@ const result = processor.page(2).filter({ sex: "female" }).search("Tho").exec();
 
 ## 如何与 Vue 配合使用
 
-Processor 为 Vue 提供了两个包.
+从 v2.0 开始，`@processor/vue` 基于 [Vue Demi](https://github.com/vueuse/vue-demi) 做了调整，同时支持 Vue 2 和 3.
 
-### Vue 2.x
-
-首先, 你需要安装 [Composition API Plugin](https://github.com/vuejs/composition-api).
+对于 **Vue 2.x**, 你应该先安装 [Composition API Plugin](https://github.com/vuejs/composition-api).
 
 **npm**
 
 ```shell
-$ npm install @vue/composition-api @processor/vue2
+$ npm install @vue/composition-api
 ```
 
 **yarn**
 
 ```shell
-$ yarn add @vue/composition-api @processor/vue2
+$ yarn add @vue/composition-api
 ```
 
 ```javascript
@@ -164,36 +162,7 @@ import VueCompositionApi from "@vue/composition-api";
 Vue.use(VueCompositionApi);
 ```
 
-```html
-<template>
-  <div>
-    {{result}}
-  </div>
-</template>
-
-<script>
-  import { useProcessor } from "@processor/vue2";
-
-  export default {
-    setup() {
-      const data = [
-        { name: "Patricia Clark", age: 16, sex: "male" },
-        { name: "Michael Hall", age: 18, sex: "female" },
-        { name: "Thomas Perez", age: 14, sex: "female" },
-        { name: "Mark Taylor", age: 11, sex: "male" },
-      ];
-      const { processor, result } = useProcessor(data);
-      processor.page(2);
-
-      return {
-        result,
-      };
-    },
-  };
-</script>
-```
-
-### Vue 3
+### 使用
 
 **npm**
 
@@ -209,7 +178,30 @@ $ yarn add @processor/vue
 
 ```javascript
 import { useProcessor } from "@processor/vue";
-const { processor, result } = useProcessor(data);
+import { reactive } from "vue";
+
+const config = reactive({
+  source: [], // 源数据
+  searchOption: "", // process.search() 的第一个参数
+  searchFields: [], // process.search() 的第二个参数
+  filterOption: {}, // process.filter() 的参数
+  sortOption: "", // process.sort() 的第一个参数
+  sortOrder: "", // process.sort() 的第二个参数
+  pageSize: "", // process.page() 的第一个参数
+});
+const {
+  data,
+  total,
+  pageCount,
+  currentPage, // 这个 ref 可以被修改
+} = useProcessor();
+```
+
+只需要修改 config，即可完成数据处理
+
+```html
+<input v-model="config.searchOption" />
+<button @click="currentPage++">next</button>
 ```
 
 ## 如何与 React 配合使用
