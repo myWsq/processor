@@ -1,4 +1,4 @@
-import { Ref, watch, ref, isReactive, readonly } from "vue-demi";
+import { Ref, watch, ref, isReactive } from "vue-demi";
 import { createProcessor, Processor, SourceData } from "@processor/core";
 
 export type useProcessorConfig<T> = {
@@ -91,9 +91,9 @@ export function useProcessor<T extends SourceData>(
   });
 
   return {
-    data: readonly(data),
-    total: readonly(total),
-    pageCount: readonly(pageCount),
+    data,
+    total,
     currentPage,
+    pageCount,
   };
 }
