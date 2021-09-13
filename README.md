@@ -139,22 +139,20 @@ const result = processor.page(2).filter({ sex: "female" }).search("Tho").exec();
 
 ## How to use with Vue
 
-Processor provide two packages for vue.
+Processor provide two packages for vue. From v2.0, it works for Vue 2 & 3 within a single package by the power of [Vue Demi](https://github.com/vueuse/vue-demi)!
 
-### Vue 2.x
-
-You should install the [Composition API Plugin](https://github.com/vuejs/composition-api) before.
+For **Vue 2.x**, you should install the [Composition API Plugin](https://github.com/vuejs/composition-api) before.
 
 **npm**
 
 ```shell
-$ npm install @vue/composition-api @processor/vue2
+$ npm install @vue/composition-api
 ```
 
 **yarn**
 
 ```shell
-$ yarn add @vue/composition-api @processor/vue2
+$ yarn add @vue/composition-api
 ```
 
 ```javascript
@@ -164,36 +162,7 @@ import VueCompositionApi from "@vue/composition-api";
 Vue.use(VueCompositionApi);
 ```
 
-```html
-<template>
-  <div>
-    {{result}}
-  </div>
-</template>
-
-<script>
-  import { useProcessor } from "@processor/vue2";
-
-  export default {
-    setup() {
-      const data = [
-        { name: "Patricia Clark", age: 16, sex: "male" },
-        { name: "Michael Hall", age: 18, sex: "female" },
-        { name: "Thomas Perez", age: 14, sex: "female" },
-        { name: "Mark Taylor", age: 11, sex: "male" },
-      ];
-      const { processor, result } = useProcessor(data);
-      processor.page(2);
-
-      return {
-        result,
-      };
-    },
-  };
-</script>
-```
-
-### Vue 3
+### Usage
 
 **npm**
 
@@ -209,7 +178,30 @@ $ yarn add @processor/vue
 
 ```javascript
 import { useProcessor } from "@processor/vue";
-const { processor, result } = useProcessor(data);
+import { reactive } from "vue";
+
+const config = reactive({
+  source: [], // source data
+  searchOption: "", // first argument of process.search()
+  searchFields: [], // second argument of process.search()
+  filterOption: {}, // argument of process.filter()
+  sortOption: "", // first argument of process.sort()
+  sortOrder: "", // second argument of process.sort()
+  pageSize: "", // first argument of process.page()
+});
+const {
+  data,
+  total,
+  pageCount,
+  currentPage, // this ref can be changed
+} = useProcessor();
+```
+
+Change config to process data.
+
+```html
+<input v-model="config.searchOption">
+<button @click="currentPage++">next</button>
 ```
 
 ## How to use with React
