@@ -1,5 +1,10 @@
-import { Ref, watch, ref, isReactive } from "vue-demi";
-import { createProcessor, Processor, SourceData } from "@processor/core";
+import { Ref, watch, ref, isReactive, onBeforeMount } from "vue-demi";
+import {
+  createProcessor,
+  Processor,
+  Result,
+  SourceData,
+} from "@processor/core";
 
 export type useProcessorConfig<T> = {
   source: T[] | null | undefined;
@@ -25,69 +30,73 @@ export function useProcessor<T extends SourceData>(
   const pageSize = ref(0);
   const pageCount = ref(0);
 
-  watch(
-    () => config.source,
-    (val) => {
-      if (!val) {
-        data.value = null;
-        total.value = 0;
-        currentPage.value = 0;
-        pageSize.value = 0;
-      } else {
-        core.load(val);
-      }
-    },
-    {
-      immediate: true,
+  function handleSource() {
+    if (!config.source) {
+      data.value = null;
+      total.value = 0;
+      currentPage.value = 0;
+      pageSize.value = 0;
+    } else {
+      core.load(config.source);
     }
-  );
+  }
 
-  watch(
-    [() => config.searchOption, config.searchFields],
-    ([option, fields]) => {
-      if (option !== undefined) {
-        core.search(option, fields);
-      }
-    },
-    {
-      immediate: true,
+  function handleSearch() {
+    if (config.searchOption !== undefined) {
+      core.search(config.searchOption, config.searchFields);
     }
-  );
+  }
 
-  watch(
-    () => config.filterOption,
-    (option) => {
-      if (option) {
-        core.filter(option);
-      }
-    },
-    {
-      immediate: true,
-      deep: true,
+  function handleFilter() {
+    if (config.filterOption) {
+      core.filter(config.filterOption);
     }
-  );
+  }
 
-  watch(
-    [() => config.sortOption, () => config.sortOrder],
-    ([option, order]) => {
-      core.sort(option, order);
-    },
-    { immediate: true }
-  );
+  function handleSort() {
+    if (config.sortOption) {
+      core.sort(config.sortOption, config.sortOrder);
+    }
+  }
 
-  watch(
-    [() => config.pageSize, currentPage],
-    ([size, current]) => {
-      core.page(size, current);
-    },
-    { immediate: true }
-  );
+  function handlePaginate() {
+    core.page(config.pageSize, currentPage.value);
+  }
 
-  core.onUpdate((res) => {
-    data.value = res.current;
-    total.value = res.total;
-    currentPage.value = res.page;
-    pageCount.value = res.pageCount;
+  function handleResult(result: Result<T>) {
+    data.value = result.current;
+    total.value = result.total;
+    currentPage.value = result.page;
+    pageCount.value = result.pageCount;
+  }
+
+  watch(() => config.source, handleSource, {
+    deep: true,
+  });
+
+  watch([() => config.searchOption, config.searchFields], handleSearch, {
+    deep: true,
+  });
+
+  watch(() => config.filterOption, handleFilter, {
+    deep: true,
+  });
+
+  watch([() => config.sortOption, () => config.sortOrder], handleSort, {
+    deep: true,
+  });
+
+  watch([() => config.pageSize, currentPage], handlePaginate);
+
+  core.onUpdate(handleResult);
+
+  onBeforeMount(() => {
+    handleSource();
+    handleSearch();
+    handleFilter();
+    handleSort();
+    handlePaginate();
+    handleResult(core.exec());
   });
 
   return {
